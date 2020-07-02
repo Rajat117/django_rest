@@ -244,21 +244,21 @@ SIMPLE_JWT = {
 
 AUTH_USER_MODEL = 'authentication.Person'
 
-# SECURE_HSTS_SECONDS = 1800
+SECURE_HSTS_SECONDS = 1800
 
-# SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 
-# SECURE_HSTS_PRELOAD = True
+SECURE_HSTS_PRELOAD = True
 
-# SECURE_SSL_REDIRECT = False
+SECURE_SSL_REDIRECT = False
 
-# SESSION_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
 
-# CSRF_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
 
-# # Configure Django App for Heroku.
-# django_heroku.settings(locals())
-# prod_db = dj_database_url.config(conn_max_age=500)
-# DATABASES['default'].update(prod_db)
+# Configure Django App for Heroku.
+django_heroku.settings(locals())
+prod_db = dj_database_url.config(conn_max_age=500)
+DATABASES['default'].update(prod_db)
 
-# CORS_ORIGIN_ALLOW_ALL = True
+CORS_ORIGIN_ALLOW_ALL = True
