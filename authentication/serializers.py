@@ -8,7 +8,13 @@ class PersonSerializer(serializers.ModelSerializer):
         model = Person
         exclude = ['created_at', 'updated_at']
 
-        extra_kwargs = {'password': {'write_only': True, 'min_length': 8}}
+        extra_kwargs = {
+            'password': {
+                'write_only': True,
+                'required': True,
+                'min_length': 8
+            }
+        }
 
     def create(self, validated_data):
         person = super().create(validated_data)
