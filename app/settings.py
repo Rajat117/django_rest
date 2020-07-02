@@ -32,7 +32,8 @@ ALLOWED_HOSTS = [
     'localhost',
     '127.0.0.1',
     '.django.cvevoxrr3iwi.us-east-1.rds.amazonaws.com',
-    '.blooming-oasis-24851.herokuapp.com'
+    '.blooming-oasis-24851.herokuapp.com',
+    'sql12.freesqldatabase.com'
 ]
 
 
@@ -101,10 +102,10 @@ WSGI_APPLICATION = 'app.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'django2',
-        'USER': 'root',
-        'PASSWORD': 'goldtree9',
-        'HOST': '127.0.0.1',
+        'NAME': 'django_rest',
+        'USER': 'admin',
+        'PASSWORD': 'iamadmin',
+        'HOST': 'django.cvevoxrr3iwi.us-east-1.rds.amazonaws.com',
         'PORT': 3306
     }
 }
@@ -243,21 +244,21 @@ SIMPLE_JWT = {
 
 AUTH_USER_MODEL = 'authentication.Person'
 
-SECURE_HSTS_SECONDS = 1800
+# SECURE_HSTS_SECONDS = 1800
 
-SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+# SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 
-SECURE_HSTS_PRELOAD = True
+# SECURE_HSTS_PRELOAD = True
 
-SECURE_SSL_REDIRECT = False
+# SECURE_SSL_REDIRECT = False
 
-SESSION_COOKIE_SECURE = True
+# SESSION_COOKIE_SECURE = True
 
-CSRF_COOKIE_SECURE = True
+# CSRF_COOKIE_SECURE = True
 
-# Configure Django App for Heroku.
-django_heroku.settings(locals())
-prod_db = dj_database_url.config(conn_max_age=500)
-DATABASES['default'].update(prod_db)
+# # Configure Django App for Heroku.
+# django_heroku.settings(locals())
+# prod_db = dj_database_url.config(conn_max_age=500)
+# DATABASES['default'].update(prod_db)
 
-CORS_ORIGIN_ALLOW_ALL = True
+# CORS_ORIGIN_ALLOW_ALL = True
