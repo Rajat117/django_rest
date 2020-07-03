@@ -12,18 +12,23 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 import dj_database_url
 import django_heroku
 from datetime import timedelta
+from dotenv import load_dotenv
 
 import os
 
+# load env variables into app
+# See https://pypi.org/project/python-dotenv/
+PROJECT_DIR = os.path.join(os.path.abspath(os.path.dirname('./__file__')))
+load_dotenv(os.path.join(PROJECT_DIR, '.env'))
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'yu22znpob@5t*ci8ar^b9enunu16d&buqpa*jt(phvw6!k@3wm'
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -102,11 +107,11 @@ WSGI_APPLICATION = 'app.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'django_rest',
-        'USER': 'admin',
-        'PASSWORD': 'iamadmin',
-        'HOST': 'django.cvevoxrr3iwi.us-east-1.rds.amazonaws.com',
-        'PORT': 3306
+        'NAME': os.getenv('DB_NAME'),
+        'USER': os.getenv('DB_USER'),
+        'PASSWORD': os.getenv('DB_PASSWORD'),
+        'HOST': os.getenv('DB_HOST'),
+        'PORT': os.getenv('DB_PORT')
     }
 }
 
@@ -246,19 +251,19 @@ AUTH_USER_MODEL = 'authentication.Person'
 
 SECURE_HSTS_SECONDS = 31536000
 
-SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+SECURE_HSTS_INCLUDE_SUBDOMAINS = os.getenv('SECURE_HSTS_INCLUDE_SUBDOMAINS')
 
-SECURE_HSTS_PRELOAD = True
+SECURE_HSTS_PRELOAD = os.getenv('SECURE_HSTS_PRELOAD')
 
-SECURE_SSL_REDIRECT = True
+SECURE_SSL_REDIRECT = os.getenv('SECURE_SSL_REDIRECT')
 
-SESSION_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = os.getenv('SECURE_SSL_REDIRECT')
 
-CSRF_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = os.getenv('CSRF_COOKIE_SECURE')
 
 # Configure Django App for Heroku.
 django_heroku.settings(locals())
 prod_db = dj_database_url.config(conn_max_age=500)
 DATABASES['default'].update(prod_db)
 
-CORS_ORIGIN_ALLOW_ALL = True
+CORS_ORIGIN_ALLOW_ALL = os.getenv('CORS_ORIGIN_ALLOW_ALL') == 'True'
