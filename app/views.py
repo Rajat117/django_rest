@@ -7,6 +7,6 @@ from rest_framework.renderers import TemplateHTMLRenderer, StaticHTMLRenderer
 @renderer_classes([StaticHTMLRenderer])
 def index(request):
     data = '''<html><h1>Django REST APIs<h1>
-    <h1><a href = "https://git.geekyants.com/rajatj/djangoREST/blob/master/Readme.md"> Go To Readme Page </a>
+    <h1><a href = "https://github.com/Rajat117/django_rest/blob/master/Readme.md"> Go To Readme Page </a>
     </h1 ></html >'''
     return Response(data)
