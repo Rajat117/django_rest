@@ -73,7 +73,7 @@ class BlogView(viewsets.ModelViewSet):
             "success": True,
             "data": serializer.data,
         }
-        return Response(obj, status=status.HTTP_401_UNAUTHORIZED)
+        return Response(obj, status=status.HTTP_200_OK)
 
     def update(self, request, pk=None):
         user = request.user
