@@ -86,7 +86,10 @@ class BlogView(viewsets.ModelViewSet):
             }
             return Response(obj, status=status.HTTP_401_UNAUTHORIZED)
 
-        serializer = BlogSerializer(queryset, data=request.data)
+        payload = request.data
+        payload['user_id'] = user.id
+
+        serializer = BlogSerializer(queryset, data=payload)
         if(serializer.is_valid()):
             serializer.save()
             obj = {
