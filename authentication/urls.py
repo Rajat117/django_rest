@@ -12,12 +12,12 @@ register = PersonAuthViewSet.as_view({
 redirect = PersonAuthViewSet.as_view({
     'get': 'redirectedMethod'
 })
+checkServer = PersonAuthViewSet.as_view({
+    'get': 'get'
+})
 
 changePassword = PersonView.as_view({
     'post': 'changePassword'
-})
-checkAuth = PersonView.as_view({
-    'get': 'get'
 })
 userinfo = PersonView.as_view({
     'get': 'userInfo'
@@ -30,11 +30,11 @@ logout = PersonView.as_view({
 urlpatterns = [
     path('api/register', register, name='register'),
     path('api/login', login, name='login'),
+    path('api/home', checkServer, name='check-server'),
     path('api/me', userinfo, name='userinfo'),
     path('api/change-password', changePassword, name='change-password'),
     path('auth/', include('rest_framework_social_oauth2.urls')),
     path('accounts/profile/', redirect, name='redirected-method'),
     path('api/refresh-token', TokenRefreshView.as_view(), name='token_refresh'),
-    path('api/home', checkAuth, name='check-auth'),
     path('api/logout', logout, name='logout')
 ]

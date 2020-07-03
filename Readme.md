@@ -9,7 +9,7 @@ The Django REST Framework API's for user authentication. Will be extended to som
 5. Activate The Virtual Enviroment `source bin/activate`
 6. Go To Your Cloned Repo Folder i.e `cd folder_name_of_this_repo`
 7. Use Command `pip install -r requirements.txt` to Install All Dependencies.
-8. Make You You have DB With The Name [django] on your mysql 
+8. Set Your Credentials In The .env file 
 9. Run The Migrations `python manage.py migrate`
 10. Run The Server `python manage.py runserver`
 

@@ -6,6 +6,7 @@ from rest_framework.views import APIView
 from rest_framework import status
 from rest_framework import viewsets
 from rest_framework import permissions
+from django.conf import settings
 
 from authentication.models import Person
 from authentication.serializers import PersonSerializer, ChangePasswordSerializer
@@ -30,6 +31,12 @@ class PersonAuthViewSet(viewsets.ModelViewSet):
 
         return Response(data, status=status.HTTP_401_UNAUTHORIZED)
 
+    def get(self, request, format=None):
+        data = {
+            "ok": True
+        }
+        return Response(data, status=status.HTTP_200_OK)
+
     def register(self, request, format=None):
         serializer = PersonSerializer(data=request.data)
         if(serializer.is_valid()):
@@ -49,11 +56,13 @@ class PersonAuthViewSet(viewsets.ModelViewSet):
         queryset = Person.objects.get(email=request.data['email'])
         if(check_password(request.data['password'], queryset.password)):
             token = get_tokens_for_user(queryset)
+            token['expires_in'] = settings.SIMPLE_JWT['ACCESS_TOKEN_LIFETIME']
+
             obj = {
                 "success": True,
                 "data": token,
             }
-            return Response(token, status=status.HTTP_200_OK)
+            return Response(obj, status=status.HTTP_200_OK)
         obj = {
             "success": False,
             "message": "Incorrect Password!"
@@ -96,12 +105,6 @@ class PersonView(viewsets.ModelViewSet):
         data = {
             "success": True,
             "data": serializer.data
-        }
-        return Response(data, status=status.HTTP_200_OK)
-
-    def get(self, request, format=None):
-        data = {
-            "ok": True
         }
         return Response(data, status=status.HTTP_200_OK)
 
